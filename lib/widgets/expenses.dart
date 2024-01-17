@@ -32,7 +32,7 @@ class _ExpensesState extends State<StatefulWidget> {
       builder: (builderontext) => Container(
         width: double.infinity,
         padding: const EdgeInsets.all(16.0),
-        child: NewExpense(),
+        child: const NewExpense(),
       ),
     );
   }
