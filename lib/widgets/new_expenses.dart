@@ -39,6 +39,32 @@ class _NewExpenseState extends State<StatefulWidget> {
     });
   }
 
+  void submitExpenseData() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+
+    if (_titleController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        selectedDate == null) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Invalid Input'),
+          content: const Text(
+              'Please make sure a valid amount, date, and category was entered...'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Cancel'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -129,7 +155,7 @@ class _NewExpenseState extends State<StatefulWidget> {
               width: 5.0,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: submitExpenseData,
               child: const Text('Save'),
             ),
           ],
