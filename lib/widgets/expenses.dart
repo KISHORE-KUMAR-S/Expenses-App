@@ -1,5 +1,6 @@
+import 'package:expense_app/widgets/chart/chart.dart';
 import 'package:expense_app/widgets/list/expenses_list.dart';
-import 'package:expense_app/models/expense.dart';
+import 'package:expense_app/models/expense_model.dart';
 import 'package:expense_app/widgets/new_expenses.dart';
 import 'package:flutter/material.dart';
 
@@ -28,17 +29,68 @@ class _ExpensesState extends State<StatefulWidget> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (builderontext) => Container(
         width: double.infinity,
         padding: const EdgeInsets.all(16.0),
-        child: const NewExpense(),
+        child: NewExpense(onAddExpense: _addExpense),
+      ),
+    );
+  }
+
+  void _addExpense(Expense expense) {
+    setState(() {
+      _expenses.add(expense);
+    });
+  }
+
+  void _removeExpense(Expense expense) {
+    final expenseIndex = _expenses.indexOf(expense);
+    setState(() {
+      _expenses.remove(expense);
+    });
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Expense removed'),
+        duration: const Duration(seconds: 3),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () => setState(() {
+            _expenses.insert(expenseIndex, expense);
+          }),
+        ),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = const Center(
+      child: Text(
+        'No expenses found. \nStart adding some!',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+      ),
+    );
+
+    if (_expenses.isNotEmpty) {
+      mainContent = Column(
+        children: [
+          Chart(expenses: _expenses),
+          Expanded(
+            child: ExpensesList(
+              expenses: _expenses,
+              onRemoveExpense: _removeExpense,
+            ), //Must be expanded before building
+          ),
+        ],
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -50,15 +102,7 @@ class _ExpensesState extends State<StatefulWidget> {
         title: const Text('Expense Tracker'),
         elevation: 0.5,
       ),
-      body: Column(
-        children: [
-          const Text('Chart'),
-          Expanded(
-            child: ExpensesList(
-                expenses: _expenses), //Must be expanded before building
-          ),
-        ],
-      ),
+      body: mainContent,
     );
   }
 }

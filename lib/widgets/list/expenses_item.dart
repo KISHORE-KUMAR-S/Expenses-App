@@ -1,4 +1,4 @@
-import 'package:expense_app/models/expense.dart';
+import 'package:expense_app/models/expense_model.dart';
 import 'package:flutter/material.dart';
 
 class ExpensesItem extends StatelessWidget {
@@ -9,14 +9,20 @@ class ExpensesItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.all(8.0),
+      margin: Theme.of(context).cardTheme.margin,
+      // margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               expenses.title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              // style: Theme.of(context)
+              //     .textTheme
+              //     .titleLarge
+              //     ?.copyWith(color: Colors.black),
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             Row(
               children: [
