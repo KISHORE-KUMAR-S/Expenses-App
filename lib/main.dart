@@ -2,8 +2,13 @@
 import 'package:expense_app/widgets/expenses.dart';
 import 'package:flutter/material.dart';
 
-var kColorScheme =
-    ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 96, 56, 181));
+var kColorScheme = ColorScheme.fromSeed(
+    seedColor: const Color.fromARGB(255, 96, 56, 181),
+    brightness: Brightness.light);
+
+var kDarkColorScheme = ColorScheme.fromSeed(
+    seedColor: const Color.fromARGB(255, 5, 99, 125),
+    brightness: Brightness.dark);
 
 void main() {
   runApp(
@@ -47,6 +52,16 @@ void main() {
                   fontSize: 20.0, color: kColorScheme.onSecondaryContainer),
             ),
       ),
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: kDarkColorScheme,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kDarkColorScheme.primaryContainer,
+            foregroundColor: kDarkColorScheme.onPrimaryContainer,
+          ),
+        ),
+      ),
+      themeMode: ThemeMode.system,
 
       //Default theme
       //   // theme: ThemeData.light(),

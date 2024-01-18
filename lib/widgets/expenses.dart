@@ -1,5 +1,6 @@
+import 'package:expense_app/widgets/chart/chart.dart';
 import 'package:expense_app/widgets/list/expenses_list.dart';
-import 'package:expense_app/models/expense.dart';
+import 'package:expense_app/models/expense_model.dart';
 import 'package:expense_app/widgets/new_expenses.dart';
 import 'package:flutter/material.dart';
 
@@ -14,16 +15,16 @@ class Expenses extends StatefulWidget {
 
 class _ExpensesState extends State<StatefulWidget> {
   final List<Expense> _expenses = [
-    // Expense(
-    //     title: 'Snacks',
-    //     amount: 20,
-    //     date: DateTime.now(),
-    //     category: Category.food),
-    // Expense(
-    //     title: 'Bus Ticket',
-    //     amount: 1153,
-    //     date: DateTime.now(),
-    //     category: Category.travel),
+    Expense(
+        title: 'Snacks',
+        amount: 20,
+        date: DateTime.now(),
+        category: Category.food),
+    Expense(
+        title: 'Bus Ticket',
+        amount: 1153,
+        date: DateTime.now(),
+        category: Category.travel),
   ];
 
   void _openAddExpenseOverlay() {
@@ -79,7 +80,7 @@ class _ExpensesState extends State<StatefulWidget> {
     if (_expenses.isNotEmpty) {
       mainContent = Column(
         children: [
-          const Text('Chart'),
+          Chart(expenses: _expenses),
           Expanded(
             child: ExpensesList(
               expenses: _expenses,
