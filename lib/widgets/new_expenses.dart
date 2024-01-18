@@ -24,17 +24,20 @@ class _NewExpenseState extends State<NewExpense> {
       initialDate: DateTime.now(),
       firstDate: DateTime(1752),
       lastDate: DateTime.now(),
-      builder: (context, child) {
-        return Theme(
-          data: ThemeData.light().copyWith(
-            primaryColor: Colors.deepPurple,
-            colorScheme: const ColorScheme.light(primary: Colors.deepPurple),
-            buttonTheme:
-                const ButtonThemeData(textTheme: ButtonTextTheme.normal),
-          ),
-          child: child!,
-        );
-      },
+
+      //Custom theme for Date Picker
+
+      // builder: (context, child) {
+      //   return Theme(
+      //     data: ThemeData.light().copyWith(
+      //       primaryColor: Colors.deepPurple,
+      //       colorScheme: const ColorScheme.light(primary: Colors.deepPurple),
+      //       buttonTheme:
+      //           const ButtonThemeData(textTheme: ButtonTextTheme.normal),
+      //     ),
+      //     child: child!,
+      //   );
+      // },
     );
 
     if (pickedDate != null) {
