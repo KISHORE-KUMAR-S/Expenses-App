@@ -1,6 +1,7 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:expense_app/widgets/expenses.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // var kColorScheme = ColorScheme.fromSeed(
 //     seedColor: const Color.fromARGB(255, 96, 56, 181),
@@ -51,10 +52,6 @@ void main() {
         home: const Expenses(),
       ),
     ),
-
-    // MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   home: const Expenses(),
 
     //   // Custom Theme
     //   theme: ThemeData().copyWith(
