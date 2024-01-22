@@ -22,13 +22,14 @@ class _ExpensesState extends State<StatefulWidget> {
         category: Category.food),
     Expense(
         title: 'Bus Ticket',
-        amount: 1153,
+        amount: 1153.93,
         date: DateTime.now(),
         category: Category.travel),
   ];
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      useSafeArea: true,
       isScrollControlled: true,
       context: context,
       builder: (builderontext) => Container(
@@ -69,6 +70,8 @@ class _ExpensesState extends State<StatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+
     Widget mainContent = const Center(
       child: Text(
         'No expenses found. \nStart adding some!',
@@ -78,17 +81,29 @@ class _ExpensesState extends State<StatefulWidget> {
     );
 
     if (_expenses.isNotEmpty) {
-      mainContent = Column(
-        children: [
-          Chart(expenses: _expenses),
-          Expanded(
-            child: ExpensesList(
-              expenses: _expenses,
-              onRemoveExpense: _removeExpense,
-            ), //Must be expanded before building
-          ),
-        ],
-      );
+      mainContent = width < 600
+          ? Column(
+              children: [
+                Chart(expenses: _expenses),
+                Expanded(
+                  child: ExpensesList(
+                    expenses: _expenses,
+                    onRemoveExpense: _removeExpense,
+                  ), //Must be expanded before building
+                ),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(child: Chart(expenses: _expenses)),
+                Expanded(
+                  child: ExpensesList(
+                    expenses: _expenses,
+                    onRemoveExpense: _removeExpense,
+                  ), //Must be expanded before building
+                ),
+              ],
+            );
     }
 
     return Scaffold(

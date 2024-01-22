@@ -52,10 +52,6 @@ void main() {
       ),
     ),
 
-    // MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   home: const Expenses(),
-
     //   // Custom Theme
     //   theme: ThemeData().copyWith(
     //     // scaffoldBackgroundColor: const Color.fromARGB(255, 255, 0, 0),
