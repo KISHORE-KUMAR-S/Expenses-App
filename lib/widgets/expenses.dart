@@ -71,7 +71,6 @@ class _ExpensesState extends State<StatefulWidget> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
 
     Widget mainContent = const Center(
       child: Text(
